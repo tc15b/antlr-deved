@@ -9,4 +9,5 @@ options {
 
 file: (command NEWLINE*)+ EOF ;
 
-command : PING ;
+command : PING 
+				| RANDOM (from=NUMBER DASH)? to=NUMBER;
