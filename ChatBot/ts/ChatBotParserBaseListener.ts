@@ -7,6 +7,7 @@ import type {
 	Ping_commandContext,
 	Random_commandContext,
 	Roll_commandContext,
+	Roll_dieContext,
 } from "./ChatBotParser";
 import ChatBotParserListener from "./ChatBotParserListener";
 
@@ -70,6 +71,17 @@ export default class ChatBotParserBaseListener implements ChatBotParserListener 
 		* The default implementation does nothing.
 		*/
 		exitRoll_command (ctx: Roll_commandContext) { }
+
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		enterRoll_die(ctx: Roll_dieContext) { }
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		exitRoll_die (ctx: Roll_dieContext) { }
 
 	/**
 	 *

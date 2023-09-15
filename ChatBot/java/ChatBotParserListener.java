@@ -60,4 +60,15 @@ public interface ChatBotParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRoll_command(ChatBotParser.Roll_commandContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ChatBotParser#roll_die}.
+	 * @param ctx the parse tree
+	 */
+	void enterRoll_die(ChatBotParser.Roll_dieContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ChatBotParser#roll_die}.
+	 * @param ctx the parse tree
+	 */
+	void exitRoll_die(ChatBotParser.Roll_dieContext ctx);
 }

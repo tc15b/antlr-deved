@@ -8,6 +8,7 @@ import { CommandContext } from "./ChatBotParser";
 import { Ping_commandContext } from "./ChatBotParser";
 import { Random_commandContext } from "./ChatBotParser";
 import { Roll_commandContext } from "./ChatBotParser";
+import { Roll_dieContext } from "./ChatBotParser";
 
 
 /**
@@ -69,5 +70,16 @@ export default interface ChatBotParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitRoll_command(ctx: Roll_commandContext): void;
+
+	/**
+	 * Enter a parse tree produced by `ChatBotParser.roll_die`.
+	 * @param ctx the parse tree
+	 */
+	enterRoll_die(ctx: Roll_dieContext): void;
+	/**
+	 * Exit a parse tree produced by `ChatBotParser.roll_die`.
+	 * @param ctx the parse tree
+	 */
+	exitRoll_die(ctx: Roll_dieContext): void;
 }
 
