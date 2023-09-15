@@ -1,17 +1,48 @@
 import { createServer, } from 'node:http';
 import QS from "node:querystring";
+import { CommonTokenStream, CharStream, } from 'antlr4';
+import ChatBotLexer from '../ChatBot/ts/ChatBotLexer';
+import ChatBotParser, { FileContext } from '../ChatBot/ts/ChatBotParser';
 
 const parsedCommands: { input: string, output: string, }[] = [];
+
+function parseInput(input: string): FileContext | null {
+	const chars = new CharStream(input, true);
+	const lexer = new ChatBotLexer(chars);
+	const tokens = new CommonTokenStream(lexer);
+	const parser = new ChatBotParser(tokens);
+
+	const errors: string[] = [];
+
+	parser.addErrorListener({
+		syntaxError(_, _symbol, line, col, msg, _e) {
+			errors.push(`line ${line}:${col} ${msg}`);
+		}
+	});
+
+	parser.buildParseTrees = true;
+	const tree = parser.file();
+
+	return errors.length ? null : tree;
+}
 
 function renderOutputHtml(input: QS.ParsedUrlQuery): string {
 	const res : string[] = [];
 	let chatInput = ''
 	if (typeof input.chat === 'string') {
 		chatInput = input.chat;
-		parsedCommands.push({
-			input: input.chat,
-			output: input.chat,
-		});
+		const tree = parseInput(input.chat);
+		if (tree) {
+			parsedCommands.push({
+				input: input.chat,
+				output: 'is cmd',
+			});
+		} else {
+			parsedCommands.push({
+				input: input.chat,
+				output: input.chat,
+			});
+		}
 	}
 
 	res.push('<!DOCTYPE html><html><head><meta charset="UTF-8"/></head><body>');
