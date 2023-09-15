@@ -16,8 +16,8 @@ public class ChatBotParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		NEWLINE=1, DASH=2, NUMBER=3, PING=4, RANDOM=5, ROLL=6, REVERSE=7, WS=8, 
-		TEXT=9, D=10, ROLL_NEWLINE=11;
+		NEWLINE=1, DASH=2, NUMBER=3, PING=4, RANDOM=5, ROLL=6, REVERSE=7, WHITESPACE=8, 
+		TEXT=9, ROLL_WS=10, ROLL_NUMBER=11, D=12, ROLL_NEWLINE=13;
 	public static final int
 		RULE_file = 0, RULE_command = 1, RULE_ping_command = 2, RULE_random_command = 3, 
 		RULE_roll_command = 4, RULE_reverse_command = 5, RULE_roll_die = 6;
@@ -32,14 +32,14 @@ public class ChatBotParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, null, "'-'", null, "'PING'", "'RANDOM'", "'ROLL'", "'REVERSE'", 
-			null, null, "'d'"
+			null, null, null, null, "'d'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "NEWLINE", "DASH", "NUMBER", "PING", "RANDOM", "ROLL", "REVERSE", 
-			"WS", "TEXT", "D", "ROLL_NEWLINE"
+			"WHITESPACE", "TEXT", "ROLL_WS", "ROLL_NUMBER", "D", "ROLL_NEWLINE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -415,7 +415,7 @@ public class ChatBotParser extends Parser {
 				setState(46); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==NUMBER || _la==D );
+			} while ( _la==ROLL_NUMBER || _la==D );
 			}
 		}
 		catch (RecognitionException re) {
@@ -496,9 +496,9 @@ public class ChatBotParser extends Parser {
 		public Token die_count;
 		public Token sides;
 		public TerminalNode D() { return getToken(ChatBotParser.D, 0); }
-		public List<TerminalNode> NUMBER() { return getTokens(ChatBotParser.NUMBER); }
-		public TerminalNode NUMBER(int i) {
-			return getToken(ChatBotParser.NUMBER, i);
+		public List<TerminalNode> ROLL_NUMBER() { return getTokens(ChatBotParser.ROLL_NUMBER); }
+		public TerminalNode ROLL_NUMBER(int i) {
+			return getToken(ChatBotParser.ROLL_NUMBER, i);
 		}
 		public Roll_dieContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -529,17 +529,17 @@ public class ChatBotParser extends Parser {
 			setState(55);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==NUMBER) {
+			if (_la==ROLL_NUMBER) {
 				{
 				setState(54);
-				((Roll_dieContext)_localctx).die_count = match(NUMBER);
+				((Roll_dieContext)_localctx).die_count = match(ROLL_NUMBER);
 				}
 			}
 
 			setState(57);
 			match(D);
 			setState(58);
-			((Roll_dieContext)_localctx).sides = match(NUMBER);
+			((Roll_dieContext)_localctx).sides = match(ROLL_NUMBER);
 			}
 		}
 		catch (RecognitionException re) {
@@ -554,7 +554,7 @@ public class ChatBotParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u000b=\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\r=\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0001\u0000\u0001\u0000\u0005"+
 		"\u0000\u0011\b\u0000\n\u0000\f\u0000\u0014\t\u0000\u0004\u0000\u0016\b"+
@@ -588,9 +588,9 @@ public class ChatBotParser extends Parser {
 		"\u0000\u0000./\u0001\u0000\u0000\u0000/\t\u0001\u0000\u0000\u000002\u0005"+
 		"\u0007\u0000\u000013\u0005\t\u0000\u000021\u0001\u0000\u0000\u000034\u0001"+
 		"\u0000\u0000\u000042\u0001\u0000\u0000\u000045\u0001\u0000\u0000\u0000"+
-		"5\u000b\u0001\u0000\u0000\u000068\u0005\u0003\u0000\u000076\u0001\u0000"+
+		"5\u000b\u0001\u0000\u0000\u000068\u0005\u000b\u0000\u000076\u0001\u0000"+
 		"\u0000\u000078\u0001\u0000\u0000\u000089\u0001\u0000\u0000\u00009:\u0005"+
-		"\n\u0000\u0000:;\u0005\u0003\u0000\u0000;\r\u0001\u0000\u0000\u0000\u0007"+
+		"\f\u0000\u0000:;\u0005\u000b\u0000\u0000;\r\u0001\u0000\u0000\u0000\u0007"+
 		"\u0012\u0017\u001f&.47";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());

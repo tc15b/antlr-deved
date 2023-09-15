@@ -20,4 +20,4 @@ random_command : RANDOM (from=NUMBER DASH)? to=NUMBER ;
 roll_command : ROLL (roll_die)+ ;
 reverse_command: REVERSE TEXT+;
 
-roll_die : die_count=NUMBER? D sides=NUMBER ;
+roll_die : die_count=ROLL_NUMBER? D sides=ROLL_NUMBER ;
