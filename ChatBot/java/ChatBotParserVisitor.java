@@ -22,4 +22,18 @@ public interface ChatBotParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCommand(ChatBotParser.CommandContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ChatBotParser#ping_command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPing_command(ChatBotParser.Ping_commandContext ctx);
+
+	/**
+	 * Visit a parse tree produced by {@link ChatBotParser#random_command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRandom_command(ChatBotParser.Random_commandContext ctx);
 }

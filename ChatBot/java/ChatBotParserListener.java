@@ -27,4 +27,26 @@ public interface ChatBotParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCommand(ChatBotParser.CommandContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ChatBotParser#ping_command}.
+	 * @param ctx the parse tree
+	 */
+	void enterPing_command(ChatBotParser.Ping_commandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ChatBotParser#ping_command}.
+	 * @param ctx the parse tree
+	 */
+	void exitPing_command(ChatBotParser.Ping_commandContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link ChatBotParser#random_command}.
+	 * @param ctx the parse tree
+	 */
+	void enterRandom_command(ChatBotParser.Random_commandContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ChatBotParser#random_command}.
+	 * @param ctx the parse tree
+	 */
+	void exitRandom_command(ChatBotParser.Random_commandContext ctx);
 }

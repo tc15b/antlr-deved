@@ -9,5 +9,9 @@ options {
 
 file: (command NEWLINE*)+ EOF ;
 
-command : PING 
-				| RANDOM (from=NUMBER DASH)? to=NUMBER;
+command : ping_command 
+				| random_command
+				;
+
+ping_command : PING ;
+random_command : RANDOM (from=NUMBER DASH)? to=NUMBER ;
