@@ -3,6 +3,9 @@ import QS from "node:querystring";
 import { CommonTokenStream, CharStream, } from 'antlr4';
 import ChatBotLexer from '../ChatBot/ts/ChatBotLexer';
 import ChatBotParser, { FileContext } from '../ChatBot/ts/ChatBotParser';
+import ChatVisitor from '../Chatbot/chatbot-visitor';
+
+const chatVisitor = new ChatVisitor();
 
 const parsedCommands: { input: string, output: string, }[] = [];
 
@@ -33,10 +36,18 @@ function renderOutputHtml(input: QS.ParsedUrlQuery): string {
 		chatInput = input.chat;
 		const tree = parseInput(input.chat);
 		if (tree) {
-			parsedCommands.push({
-				input: input.chat,
-				output: 'is cmd',
-			});
+			const responseContent = chatVisitor.visitFile(tree);
+			if (!responseContent) {
+				parsedCommands.push({
+					input: input.chat,
+					output: "Processing the content returned no data, but should have done at this point",
+				});
+			} else {
+				parsedCommands.push({
+					input: input.chat,
+					output: responseContent
+				});
+			}
 		} else {
 			parsedCommands.push({
 				input: input.chat,
