@@ -53,8 +53,7 @@ export default class extends ChatBotParserBaseVisitor<string, string> {
 	};
 
 	override visitReverse_command = (ctx: Reverse_commandContext) => {
-		console.log('rev?')
-		return [...ctx.getText()].reverse().join('');
+		return [...ctx.REVERSE_TEXT_list()].reverse().join('');
 	};
 
 	override defaultResult = () => '';

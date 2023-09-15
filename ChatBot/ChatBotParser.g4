@@ -18,6 +18,6 @@ command : ping_command
 ping_command : PING ;
 random_command : RANDOM (from=NUMBER DASH)? to=NUMBER ;
 roll_command : ROLL (roll_die)+ ;
-reverse_command: REVERSE TEXT+;
+reverse_command: REVERSE REVERSE_TEXT+;
 
 roll_die : die_count=ROLL_NUMBER? D sides=ROLL_NUMBER ;

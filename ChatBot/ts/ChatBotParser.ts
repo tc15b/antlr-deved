@@ -26,9 +26,14 @@ export default class ChatBotParser extends Parser {
 	public static readonly RANDOM = 5;
 	public static readonly ROLL = 6;
 	public static readonly REVERSE = 7;
-	public static readonly D = 8;
-	public static readonly WS = 9;
-	public static readonly TEXT = 10;
+	public static readonly WHITESPACE = 8;
+	public static readonly TEXT = 9;
+	public static readonly ROLL_WS = 10;
+	public static readonly ROLL_NUMBER = 11;
+	public static readonly D = 12;
+	public static readonly ROLL_NEWLINE = 13;
+	public static readonly REVERSE_TEXT = 14;
+	public static readonly REVERSE_NEWLINE = 15;
 	public static readonly EOF = Token.EOF;
 	public static readonly RULE_file = 0;
 	public static readonly RULE_command = 1;
@@ -41,13 +46,19 @@ export default class ChatBotParser extends Parser {
                                                             "'-'", null, 
                                                             "'PING'", "'RANDOM'", 
                                                             "'ROLL'", "'REVERSE'", 
+                                                            null, null, 
+                                                            null, null, 
                                                             "'d'" ];
 	public static readonly symbolicNames: (string | null)[] = [ null, "NEWLINE", 
                                                              "DASH", "NUMBER", 
                                                              "PING", "RANDOM", 
                                                              "ROLL", "REVERSE", 
-                                                             "D", "WS", 
-                                                             "TEXT" ];
+                                                             "WHITESPACE", 
+                                                             "TEXT", "ROLL_WS", 
+                                                             "ROLL_NUMBER", 
+                                                             "D", "ROLL_NEWLINE", 
+                                                             "REVERSE_TEXT", 
+                                                             "REVERSE_NEWLINE" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"file", "command", "ping_command", "random_command", "roll_command", "reverse_command", 
@@ -262,7 +273,7 @@ export default class ChatBotParser extends Parser {
 				this.state = 46;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while (_la===3 || _la===8);
+			} while (_la===11 || _la===12);
 			}
 		}
 		catch (re) {
@@ -296,13 +307,13 @@ export default class ChatBotParser extends Parser {
 				{
 				{
 				this.state = 49;
-				this.match(ChatBotParser.TEXT);
+				this.match(ChatBotParser.REVERSE_TEXT);
 				}
 				}
 				this.state = 52;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while (_la===10);
+			} while (_la===14);
 			}
 		}
 		catch (re) {
@@ -330,17 +341,17 @@ export default class ChatBotParser extends Parser {
 			this.state = 55;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===3) {
+			if (_la===11) {
 				{
 				this.state = 54;
-				localctx._die_count = this.match(ChatBotParser.NUMBER);
+				localctx._die_count = this.match(ChatBotParser.ROLL_NUMBER);
 				}
 			}
 
 			this.state = 57;
 			this.match(ChatBotParser.D);
 			this.state = 58;
-			localctx._sides = this.match(ChatBotParser.NUMBER);
+			localctx._sides = this.match(ChatBotParser.ROLL_NUMBER);
 			}
 		}
 		catch (re) {
@@ -358,7 +369,7 @@ export default class ChatBotParser extends Parser {
 		return localctx;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,10,61,2,0,7,0,2,
+	public static readonly _serializedATN: number[] = [4,1,15,61,2,0,7,0,2,
 	1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,1,0,1,0,5,0,17,8,0,10,0,12,
 	0,20,9,0,4,0,22,8,0,11,0,12,0,23,1,0,1,0,1,1,1,1,1,1,1,1,3,1,32,8,1,1,2,
 	1,2,1,3,1,3,1,3,3,3,39,8,3,1,3,1,3,1,4,1,4,4,4,45,8,4,11,4,12,4,46,1,5,
@@ -372,10 +383,10 @@ export default class ChatBotParser extends Parser {
 	0,32,3,1,0,0,0,33,34,5,4,0,0,34,5,1,0,0,0,35,38,5,5,0,0,36,37,5,3,0,0,37,
 	39,5,2,0,0,38,36,1,0,0,0,38,39,1,0,0,0,39,40,1,0,0,0,40,41,5,3,0,0,41,7,
 	1,0,0,0,42,44,5,6,0,0,43,45,3,12,6,0,44,43,1,0,0,0,45,46,1,0,0,0,46,44,
-	1,0,0,0,46,47,1,0,0,0,47,9,1,0,0,0,48,50,5,7,0,0,49,51,5,10,0,0,50,49,1,
-	0,0,0,51,52,1,0,0,0,52,50,1,0,0,0,52,53,1,0,0,0,53,11,1,0,0,0,54,56,5,3,
-	0,0,55,54,1,0,0,0,55,56,1,0,0,0,56,57,1,0,0,0,57,58,5,8,0,0,58,59,5,3,0,
-	0,59,13,1,0,0,0,7,18,23,31,38,46,52,55];
+	1,0,0,0,46,47,1,0,0,0,47,9,1,0,0,0,48,50,5,7,0,0,49,51,5,14,0,0,50,49,1,
+	0,0,0,51,52,1,0,0,0,52,50,1,0,0,0,52,53,1,0,0,0,53,11,1,0,0,0,54,56,5,11,
+	0,0,55,54,1,0,0,0,55,56,1,0,0,0,56,57,1,0,0,0,57,58,5,12,0,0,58,59,5,11,
+	0,0,59,13,1,0,0,0,7,18,23,31,38,46,52,55];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -617,11 +628,11 @@ export class Reverse_commandContext extends ParserRuleContext {
 	public REVERSE(): TerminalNode {
 		return this.getToken(ChatBotParser.REVERSE, 0);
 	}
-	public TEXT_list(): TerminalNode[] {
-	    	return this.getTokens(ChatBotParser.TEXT);
+	public REVERSE_TEXT_list(): TerminalNode[] {
+	    	return this.getTokens(ChatBotParser.REVERSE_TEXT);
 	}
-	public TEXT(i: number): TerminalNode {
-		return this.getToken(ChatBotParser.TEXT, i);
+	public REVERSE_TEXT(i: number): TerminalNode {
+		return this.getToken(ChatBotParser.REVERSE_TEXT, i);
 	}
     public get ruleIndex(): number {
     	return ChatBotParser.RULE_reverse_command;
@@ -661,11 +672,11 @@ export class Roll_dieContext extends ParserRuleContext {
 	public D(): TerminalNode {
 		return this.getToken(ChatBotParser.D, 0);
 	}
-	public NUMBER_list(): TerminalNode[] {
-	    	return this.getTokens(ChatBotParser.NUMBER);
+	public ROLL_NUMBER_list(): TerminalNode[] {
+	    	return this.getTokens(ChatBotParser.ROLL_NUMBER);
 	}
-	public NUMBER(i: number): TerminalNode {
-		return this.getToken(ChatBotParser.NUMBER, i);
+	public ROLL_NUMBER(i: number): TerminalNode {
+		return this.getToken(ChatBotParser.ROLL_NUMBER, i);
 	}
     public get ruleIndex(): number {
     	return ChatBotParser.RULE_roll_die;

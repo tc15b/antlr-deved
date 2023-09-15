@@ -17,7 +17,8 @@ public class ChatBotParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		NEWLINE=1, DASH=2, NUMBER=3, PING=4, RANDOM=5, ROLL=6, REVERSE=7, WHITESPACE=8, 
-		TEXT=9, ROLL_WS=10, ROLL_NUMBER=11, D=12, ROLL_NEWLINE=13;
+		TEXT=9, ROLL_WS=10, ROLL_NUMBER=11, D=12, ROLL_NEWLINE=13, REVERSE_TEXT=14, 
+		REVERSE_NEWLINE=15;
 	public static final int
 		RULE_file = 0, RULE_command = 1, RULE_ping_command = 2, RULE_random_command = 3, 
 		RULE_roll_command = 4, RULE_reverse_command = 5, RULE_roll_die = 6;
@@ -39,7 +40,8 @@ public class ChatBotParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "NEWLINE", "DASH", "NUMBER", "PING", "RANDOM", "ROLL", "REVERSE", 
-			"WHITESPACE", "TEXT", "ROLL_WS", "ROLL_NUMBER", "D", "ROLL_NEWLINE"
+			"WHITESPACE", "TEXT", "ROLL_WS", "ROLL_NUMBER", "D", "ROLL_NEWLINE", 
+			"REVERSE_TEXT", "REVERSE_NEWLINE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -432,9 +434,9 @@ public class ChatBotParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class Reverse_commandContext extends ParserRuleContext {
 		public TerminalNode REVERSE() { return getToken(ChatBotParser.REVERSE, 0); }
-		public List<TerminalNode> TEXT() { return getTokens(ChatBotParser.TEXT); }
-		public TerminalNode TEXT(int i) {
-			return getToken(ChatBotParser.TEXT, i);
+		public List<TerminalNode> REVERSE_TEXT() { return getTokens(ChatBotParser.REVERSE_TEXT); }
+		public TerminalNode REVERSE_TEXT(int i) {
+			return getToken(ChatBotParser.REVERSE_TEXT, i);
 		}
 		public Reverse_commandContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -471,13 +473,13 @@ public class ChatBotParser extends Parser {
 				{
 				{
 				setState(49);
-				match(TEXT);
+				match(REVERSE_TEXT);
 				}
 				}
 				setState(52); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( _la==TEXT );
+			} while ( _la==REVERSE_TEXT );
 			}
 		}
 		catch (RecognitionException re) {
@@ -554,7 +556,7 @@ public class ChatBotParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\r=\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u000f=\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0001\u0000\u0001\u0000\u0005"+
 		"\u0000\u0011\b\u0000\n\u0000\f\u0000\u0014\t\u0000\u0004\u0000\u0016\b"+
@@ -586,12 +588,12 @@ public class ChatBotParser extends Parser {
 		")\u0007\u0001\u0000\u0000\u0000*,\u0005\u0006\u0000\u0000+-\u0003\f\u0006"+
 		"\u0000,+\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000.,\u0001\u0000"+
 		"\u0000\u0000./\u0001\u0000\u0000\u0000/\t\u0001\u0000\u0000\u000002\u0005"+
-		"\u0007\u0000\u000013\u0005\t\u0000\u000021\u0001\u0000\u0000\u000034\u0001"+
-		"\u0000\u0000\u000042\u0001\u0000\u0000\u000045\u0001\u0000\u0000\u0000"+
-		"5\u000b\u0001\u0000\u0000\u000068\u0005\u000b\u0000\u000076\u0001\u0000"+
-		"\u0000\u000078\u0001\u0000\u0000\u000089\u0001\u0000\u0000\u00009:\u0005"+
-		"\f\u0000\u0000:;\u0005\u000b\u0000\u0000;\r\u0001\u0000\u0000\u0000\u0007"+
-		"\u0012\u0017\u001f&.47";
+		"\u0007\u0000\u000013\u0005\u000e\u0000\u000021\u0001\u0000\u0000\u0000"+
+		"34\u0001\u0000\u0000\u000042\u0001\u0000\u0000\u000045\u0001\u0000\u0000"+
+		"\u00005\u000b\u0001\u0000\u0000\u000068\u0005\u000b\u0000\u000076\u0001"+
+		"\u0000\u0000\u000078\u0001\u0000\u0000\u000089\u0001\u0000\u0000\u0000"+
+		"9:\u0005\f\u0000\u0000:;\u0005\u000b\u0000\u0000;\r\u0001\u0000\u0000"+
+		"\u0000\u0007\u0012\u0017\u001f&.47";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

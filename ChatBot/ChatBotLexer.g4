@@ -14,7 +14,7 @@ NUMBER : DIGIT+ ;
 PING: 'PING' ;
 RANDOM: 'RANDOM' ;
 ROLL: 'ROLL' -> pushMode(Roll) ;
-REVERSE: 'REVERSE' ;
+REVERSE: 'REVERSE' -> pushMode(Reverse) ;
 
 
 WHITESPACE : WS+ -> skip ;
@@ -25,3 +25,7 @@ mode Roll;
 	ROLL_NUMBER: DIGIT+ ;
 	D: 'd' ;
 	ROLL_NEWLINE : EOI -> skip,popMode ;
+
+mode Reverse;
+	REVERSE_TEXT : .+? ;
+	REVERSE_NEWLINE : EOI -> skip,popMode ;
