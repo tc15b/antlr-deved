@@ -44,8 +44,8 @@ export default class ChatBotParser extends Parser {
 	public static readonly RULE_roll_die = 6;
 	public static readonly literalNames: (string | null)[] = [ null, null, 
                                                             "'-'", null, 
-                                                            "'PING'", "'RANDOM'", 
-                                                            "'ROLL'", "'REVERSE'", 
+                                                            "'PING'", null, 
+                                                            null, null, 
                                                             null, null, 
                                                             null, null, 
                                                             "'d'" ];

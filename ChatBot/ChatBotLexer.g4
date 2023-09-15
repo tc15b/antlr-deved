@@ -12,9 +12,9 @@ DASH: '-' ;
 NUMBER : DIGIT+ ;
 
 PING: 'PING' ;
-RANDOM: 'RANDOM' ;
-ROLL: 'ROLL' -> pushMode(Roll) ;
-REVERSE: 'REVERSE' -> pushMode(Reverse) ;
+RANDOM: 'RANDOM' WS+ ;
+ROLL: 'ROLL' WS+ -> pushMode(Roll) ;
+REVERSE: 'REVERSE' WS+ -> pushMode(Reverse) ;
 
 
 WHITESPACE : WS+ -> skip ;

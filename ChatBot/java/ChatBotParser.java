@@ -32,8 +32,8 @@ public class ChatBotParser extends Parser {
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, null, "'-'", null, "'PING'", "'RANDOM'", "'ROLL'", "'REVERSE'", 
-			null, null, null, null, "'d'"
+			null, null, "'-'", null, "'PING'", null, null, null, null, null, null, 
+			null, "'d'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
