@@ -16,8 +16,8 @@ public class ChatBotParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		NEWLINE=1, DASH=2, NUMBER=3, PING=4, RANDOM=5, ROLL=6, REVERSE=7, D=8, 
-		WS=9, TEXT=10;
+		NEWLINE=1, DASH=2, NUMBER=3, PING=4, RANDOM=5, ROLL=6, REVERSE=7, WS=8, 
+		TEXT=9, D=10, ROLL_NEWLINE=11;
 	public static final int
 		RULE_file = 0, RULE_command = 1, RULE_ping_command = 2, RULE_random_command = 3, 
 		RULE_roll_command = 4, RULE_reverse_command = 5, RULE_roll_die = 6;
@@ -32,14 +32,14 @@ public class ChatBotParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, null, "'-'", null, "'PING'", "'RANDOM'", "'ROLL'", "'REVERSE'", 
-			"'d'"
+			null, null, "'d'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, "NEWLINE", "DASH", "NUMBER", "PING", "RANDOM", "ROLL", "REVERSE", 
-			"D", "WS", "TEXT"
+			"WS", "TEXT", "D", "ROLL_NEWLINE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -554,7 +554,7 @@ public class ChatBotParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\n=\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\u000b=\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0001\u0000\u0001\u0000\u0005"+
 		"\u0000\u0011\b\u0000\n\u0000\f\u0000\u0014\t\u0000\u0004\u0000\u0016\b"+
@@ -586,11 +586,11 @@ public class ChatBotParser extends Parser {
 		")\u0007\u0001\u0000\u0000\u0000*,\u0005\u0006\u0000\u0000+-\u0003\f\u0006"+
 		"\u0000,+\u0001\u0000\u0000\u0000-.\u0001\u0000\u0000\u0000.,\u0001\u0000"+
 		"\u0000\u0000./\u0001\u0000\u0000\u0000/\t\u0001\u0000\u0000\u000002\u0005"+
-		"\u0007\u0000\u000013\u0005\n\u0000\u000021\u0001\u0000\u0000\u000034\u0001"+
+		"\u0007\u0000\u000013\u0005\t\u0000\u000021\u0001\u0000\u0000\u000034\u0001"+
 		"\u0000\u0000\u000042\u0001\u0000\u0000\u000045\u0001\u0000\u0000\u0000"+
 		"5\u000b\u0001\u0000\u0000\u000068\u0005\u0003\u0000\u000076\u0001\u0000"+
 		"\u0000\u000078\u0001\u0000\u0000\u000089\u0001\u0000\u0000\u00009:\u0005"+
-		"\b\u0000\u0000:;\u0005\u0003\u0000\u0000;\r\u0001\u0000\u0000\u0000\u0007"+
+		"\n\u0000\u0000:;\u0005\u0003\u0000\u0000;\r\u0001\u0000\u0000\u0000\u0007"+
 		"\u0012\u0017\u001f&.47";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());

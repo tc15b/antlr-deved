@@ -12,10 +12,13 @@ NUMBER : DIGIT+ ;
 
 PING: 'PING' ;
 RANDOM: 'RANDOM' ;
-ROLL: 'ROLL' ;
+ROLL: 'ROLL' -> pushMode(Roll) ;
 REVERSE: 'REVERSE' ;
 
-D: 'd' ;
 
 WS : [ \t\r\n]+ -> skip ;
 TEXT : .+? ;
+
+mode Roll;
+	D: 'd' ;
+	ROLL_NEWLINE : EOI -> skip,popMode ;
