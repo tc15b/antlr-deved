@@ -16,4 +16,4 @@ command : ping_command
 
 ping_command : PING ;
 random_command : RANDOM (from=NUMBER DASH)? to=NUMBER ;
-roll_command : ROLL die_count=NUMBER? D sides=NUMBER ;
+roll_command : ROLL (die_count=NUMBER? D sides=NUMBER)+ ;
