@@ -81,6 +81,19 @@ public class ChatBotParserBaseListener implements ChatBotParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterReverse_command(ChatBotParser.Reverse_commandContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReverse_command(ChatBotParser.Reverse_commandContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRoll_die(ChatBotParser.Roll_dieContext ctx) { }
 	/**
 	 * {@inheritDoc}

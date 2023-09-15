@@ -1,4 +1,4 @@
-import { FileContext, Ping_commandContext, Random_commandContext, Roll_commandContext, } from "../ChatBot/ts/ChatBotParser";
+import { FileContext, Ping_commandContext, Random_commandContext, Reverse_commandContext, Roll_commandContext, } from "../ChatBot/ts/ChatBotParser";
 import ChatBotParserBaseVisitor from "../ChatBot/ts/ChatBotParserBaseVisitor";
 
 function randomIntFromInterval(min: number, max: number) {
@@ -50,6 +50,11 @@ export default class extends ChatBotParserBaseVisitor<string, string> {
 		}
 
 		return `(${rolls.map(({ label, }) => label).join(") + (")}) = ${rolls.reduce((acc, val) => val.rollValue + acc, 0)}`;
+	};
+
+	override visitReverse_command = (ctx: Reverse_commandContext) => {
+		console.log('rev?')
+		return [...ctx.getText()].reverse().join('');
 	};
 
 	override defaultResult = () => '';

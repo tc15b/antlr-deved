@@ -13,7 +13,9 @@ NUMBER : DIGIT+ ;
 PING: 'PING' ;
 RANDOM: 'RANDOM' ;
 ROLL: 'ROLL' ;
+REVERSE: 'REVERSE' ;
 
 D: 'd' ;
 
 WS : [ \t\r\n]+ -> skip ;
+TEXT : .+? ;

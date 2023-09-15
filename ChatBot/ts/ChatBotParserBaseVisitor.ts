@@ -7,6 +7,7 @@ import type {
 	Ping_commandContext,
 	Random_commandContext,
 	Roll_commandContext,
+	Reverse_commandContext,
 	Roll_dieContext,
 } from "./ChatBotParser";
 import ChatBotParserVisitor from "./ChatBotParserVisitor";
@@ -41,6 +42,12 @@ export default class ChatBotParserBaseVisitor<Result, DefaultType = null> extend
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 		visitRoll_command = (ctx: Roll_commandContext) => this.visitChildren(ctx); 
+
+	/**
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+		visitReverse_command = (ctx: Reverse_commandContext) => this.visitChildren(ctx); 
 
 	/**
 	 * The default implementation returns the result of calling

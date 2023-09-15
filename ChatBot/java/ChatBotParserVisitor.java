@@ -45,6 +45,13 @@ public interface ChatBotParserVisitor<T> extends ParseTreeVisitor<T> {
 	T visitRoll_command(ChatBotParser.Roll_commandContext ctx);
 
 	/**
+	 * Visit a parse tree produced by {@link ChatBotParser#reverse_command}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReverse_command(ChatBotParser.Reverse_commandContext ctx);
+
+	/**
 	 * Visit a parse tree produced by {@link ChatBotParser#roll_die}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
