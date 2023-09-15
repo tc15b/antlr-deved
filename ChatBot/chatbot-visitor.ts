@@ -23,14 +23,33 @@ export default class extends ChatBotParserBaseVisitor<string, string> {
 	};
 
 	override visitRoll_command = (ctx: Roll_commandContext) => {
-		const dieCount = parseInt(ctx._die_count?.text ?? "1", 10);
-		const sides = parseInt(ctx._sides.text, 10);
 
-		const rolledValues = Array(dieCount)
-			.fill(0)
-			.map(() => randomIntFromInterval(1, sides));
+		const rolls = ctx.roll_die_list()
+			.map((node) => {
+				const dieCount = parseInt(node._die_count?.text ?? "1", 10);
+				const sides = parseInt(node._sides.text, 10);
+		
+				const rolledValues = Array(dieCount)
+					.fill(0)
+					.map(() => randomIntFromInterval(1, sides));
 
-		return `${rolledValues.join(" + ")} = ${rolledValues.reduce((acc, val) => acc + val)}`;
+				const rollValue = rolledValues.reduce((acc, val) => acc + val);
+		
+				return {
+					label: `${rolledValues.join(" + ")} = ${rollValue}`,
+					rollValue,
+				};
+			});
+
+		if (!rolls.length) {
+			return 'no die rolled :(';
+		}
+
+		if (rolls.length === 1) {
+			return rolls[0].label;
+		}
+
+		return `(${rolls.map(({ label, }) => label).join(") + (")}) = ${rolls.reduce((acc, val) => val.rollValue + acc, 0)}`;
 	};
 
 	override defaultResult = () => '';
