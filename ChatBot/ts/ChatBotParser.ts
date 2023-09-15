@@ -24,22 +24,27 @@ export default class ChatBotParser extends Parser {
 	public static readonly NUMBER = 3;
 	public static readonly PING = 4;
 	public static readonly RANDOM = 5;
-	public static readonly WS = 6;
+	public static readonly ROLL = 6;
+	public static readonly D = 7;
+	public static readonly WS = 8;
 	public static readonly EOF = Token.EOF;
 	public static readonly RULE_file = 0;
 	public static readonly RULE_command = 1;
 	public static readonly RULE_ping_command = 2;
 	public static readonly RULE_random_command = 3;
+	public static readonly RULE_roll_command = 4;
 	public static readonly literalNames: (string | null)[] = [ null, null, 
                                                             "'-'", null, 
-                                                            "'PING'", "'RANDOM'" ];
+                                                            "'PING'", "'RANDOM'", 
+                                                            "'ROLL'", "'d'" ];
 	public static readonly symbolicNames: (string | null)[] = [ null, "NEWLINE", 
                                                              "DASH", "NUMBER", 
                                                              "PING", "RANDOM", 
+                                                             "ROLL", "D", 
                                                              "WS" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
-		"file", "command", "ping_command", "random_command",
+		"file", "command", "ping_command", "random_command", "roll_command",
 	];
 	public get grammarFileName(): string { return "ChatBotParser.g4"; }
 	public get literalNames(): (string | null)[] { return ChatBotParser.literalNames; }
@@ -63,35 +68,35 @@ export default class ChatBotParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 15;
+			this.state = 17;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 8;
+				this.state = 10;
 				this.command();
-				this.state = 12;
+				this.state = 14;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				while (_la===1) {
 					{
 					{
-					this.state = 9;
+					this.state = 11;
 					this.match(ChatBotParser.NEWLINE);
 					}
 					}
-					this.state = 14;
+					this.state = 16;
 					this._errHandler.sync(this);
 					_la = this._input.LA(1);
 				}
 				}
 				}
-				this.state = 17;
+				this.state = 19;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while (_la===4 || _la===5);
-			this.state = 19;
+			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 112) !== 0));
+			this.state = 21;
 			this.match(ChatBotParser.EOF);
 			}
 		}
@@ -114,21 +119,28 @@ export default class ChatBotParser extends Parser {
 		let localctx: CommandContext = new CommandContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 2, ChatBotParser.RULE_command);
 		try {
-			this.state = 23;
+			this.state = 26;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 4:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 21;
+				this.state = 23;
 				this.ping_command();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 22;
+				this.state = 24;
 				this.random_command();
+				}
+				break;
+			case 6:
+				this.enterOuterAlt(localctx, 3);
+				{
+				this.state = 25;
+				this.roll_command();
 				}
 				break;
 			default:
@@ -156,7 +168,7 @@ export default class ChatBotParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 25;
+			this.state = 28;
 			this.match(ChatBotParser.PING);
 			}
 		}
@@ -181,21 +193,21 @@ export default class ChatBotParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 27;
-			this.match(ChatBotParser.RANDOM);
 			this.state = 30;
+			this.match(ChatBotParser.RANDOM);
+			this.state = 33;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 3, this._ctx) ) {
 			case 1:
 				{
-				this.state = 28;
+				this.state = 31;
 				localctx._from_ = this.match(ChatBotParser.NUMBER);
-				this.state = 29;
+				this.state = 32;
 				this.match(ChatBotParser.DASH);
 				}
 				break;
 			}
-			this.state = 32;
+			this.state = 35;
 			localctx._to = this.match(ChatBotParser.NUMBER);
 			}
 		}
@@ -213,18 +225,60 @@ export default class ChatBotParser extends Parser {
 		}
 		return localctx;
 	}
+	// @RuleVersion(0)
+	public roll_command(): Roll_commandContext {
+		let localctx: Roll_commandContext = new Roll_commandContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 8, ChatBotParser.RULE_roll_command);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 37;
+			this.match(ChatBotParser.ROLL);
+			this.state = 39;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			if (_la===3) {
+				{
+				this.state = 38;
+				localctx._die_count = this.match(ChatBotParser.NUMBER);
+				}
+			}
 
-	public static readonly _serializedATN: number[] = [4,1,6,35,2,0,7,0,2,1,
-	7,1,2,2,7,2,2,3,7,3,1,0,1,0,5,0,11,8,0,10,0,12,0,14,9,0,4,0,16,8,0,11,0,
-	12,0,17,1,0,1,0,1,1,1,1,3,1,24,8,1,1,2,1,2,1,3,1,3,1,3,3,3,31,8,3,1,3,1,
-	3,1,3,0,0,4,0,2,4,6,0,0,34,0,15,1,0,0,0,2,23,1,0,0,0,4,25,1,0,0,0,6,27,
-	1,0,0,0,8,12,3,2,1,0,9,11,5,1,0,0,10,9,1,0,0,0,11,14,1,0,0,0,12,10,1,0,
-	0,0,12,13,1,0,0,0,13,16,1,0,0,0,14,12,1,0,0,0,15,8,1,0,0,0,16,17,1,0,0,
-	0,17,15,1,0,0,0,17,18,1,0,0,0,18,19,1,0,0,0,19,20,5,0,0,1,20,1,1,0,0,0,
-	21,24,3,4,2,0,22,24,3,6,3,0,23,21,1,0,0,0,23,22,1,0,0,0,24,3,1,0,0,0,25,
-	26,5,4,0,0,26,5,1,0,0,0,27,30,5,5,0,0,28,29,5,3,0,0,29,31,5,2,0,0,30,28,
-	1,0,0,0,30,31,1,0,0,0,31,32,1,0,0,0,32,33,5,3,0,0,33,7,1,0,0,0,4,12,17,
-	23,30];
+			this.state = 41;
+			this.match(ChatBotParser.D);
+			this.state = 42;
+			localctx._sides = this.match(ChatBotParser.NUMBER);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+
+	public static readonly _serializedATN: number[] = [4,1,8,45,2,0,7,0,2,1,
+	7,1,2,2,7,2,2,3,7,3,2,4,7,4,1,0,1,0,5,0,13,8,0,10,0,12,0,16,9,0,4,0,18,
+	8,0,11,0,12,0,19,1,0,1,0,1,1,1,1,1,1,3,1,27,8,1,1,2,1,2,1,3,1,3,1,3,3,3,
+	34,8,3,1,3,1,3,1,4,1,4,3,4,40,8,4,1,4,1,4,1,4,1,4,0,0,5,0,2,4,6,8,0,0,45,
+	0,17,1,0,0,0,2,26,1,0,0,0,4,28,1,0,0,0,6,30,1,0,0,0,8,37,1,0,0,0,10,14,
+	3,2,1,0,11,13,5,1,0,0,12,11,1,0,0,0,13,16,1,0,0,0,14,12,1,0,0,0,14,15,1,
+	0,0,0,15,18,1,0,0,0,16,14,1,0,0,0,17,10,1,0,0,0,18,19,1,0,0,0,19,17,1,0,
+	0,0,19,20,1,0,0,0,20,21,1,0,0,0,21,22,5,0,0,1,22,1,1,0,0,0,23,27,3,4,2,
+	0,24,27,3,6,3,0,25,27,3,8,4,0,26,23,1,0,0,0,26,24,1,0,0,0,26,25,1,0,0,0,
+	27,3,1,0,0,0,28,29,5,4,0,0,29,5,1,0,0,0,30,33,5,5,0,0,31,32,5,3,0,0,32,
+	34,5,2,0,0,33,31,1,0,0,0,33,34,1,0,0,0,34,35,1,0,0,0,35,36,5,3,0,0,36,7,
+	1,0,0,0,37,39,5,6,0,0,38,40,5,3,0,0,39,38,1,0,0,0,39,40,1,0,0,0,40,41,1,
+	0,0,0,41,42,5,7,0,0,42,43,5,3,0,0,43,9,1,0,0,0,5,14,19,26,33,39];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -298,6 +352,9 @@ export class CommandContext extends ParserRuleContext {
 	}
 	public random_command(): Random_commandContext {
 		return this.getTypedRuleContext(Random_commandContext, 0) as Random_commandContext;
+	}
+	public roll_command(): Roll_commandContext {
+		return this.getTypedRuleContext(Roll_commandContext, 0) as Roll_commandContext;
 	}
     public get ruleIndex(): number {
     	return ChatBotParser.RULE_command;
@@ -406,5 +463,52 @@ export class Random_commandContext extends ParserRuleContext {
 
 	private IsTypedVisitor<Result>(visitor: ParseTreeVisitor<Result>) : visitor is ChatBotParserVisitor<Result> {
 		return (visitor as ChatBotParserVisitor<Result>).visitRandom_command !== undefined;
+	}
+}
+
+
+export class Roll_commandContext extends ParserRuleContext {
+	public _die_count!: Token;
+	public _sides!: Token;
+	constructor(parser?: ChatBotParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public ROLL(): TerminalNode {
+		return this.getToken(ChatBotParser.ROLL, 0);
+	}
+	public D(): TerminalNode {
+		return this.getToken(ChatBotParser.D, 0);
+	}
+	public NUMBER_list(): TerminalNode[] {
+	    	return this.getTokens(ChatBotParser.NUMBER);
+	}
+	public NUMBER(i: number): TerminalNode {
+		return this.getToken(ChatBotParser.NUMBER, i);
+	}
+    public get ruleIndex(): number {
+    	return ChatBotParser.RULE_roll_command;
+	}
+	public enterRule(listener: ChatBotParserListener): void {
+	    if(listener.enterRoll_command) {
+	 		listener.enterRoll_command(this);
+		}
+	}
+	public exitRule(listener: ChatBotParserListener): void {
+	    if(listener.exitRoll_command) {
+	 		listener.exitRoll_command(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ParseTreeVisitor<Result>): Result {
+		if (this.IsTypedVisitor(visitor)) {
+			return visitor.visitRoll_command(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+
+	private IsTypedVisitor<Result>(visitor: ParseTreeVisitor<Result>) : visitor is ChatBotParserVisitor<Result> {
+		return (visitor as ChatBotParserVisitor<Result>).visitRoll_command !== undefined;
 	}
 }

@@ -11,7 +11,9 @@ file: (command NEWLINE*)+ EOF ;
 
 command : ping_command 
 				| random_command
+				| roll_command
 				;
 
 ping_command : PING ;
 random_command : RANDOM (from=NUMBER DASH)? to=NUMBER ;
+roll_command : ROLL die_count=NUMBER? D sides=NUMBER ;

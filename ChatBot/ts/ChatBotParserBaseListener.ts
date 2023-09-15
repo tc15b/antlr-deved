@@ -6,6 +6,7 @@ import type {
 	CommandContext,
 	Ping_commandContext,
 	Random_commandContext,
+	Roll_commandContext,
 } from "./ChatBotParser";
 import ChatBotParserListener from "./ChatBotParserListener";
 
@@ -58,6 +59,17 @@ export default class ChatBotParserBaseListener implements ChatBotParserListener 
 		* The default implementation does nothing.
 		*/
 		exitRandom_command (ctx: Random_commandContext) { }
+
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		enterRoll_command(ctx: Roll_commandContext) { }
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		exitRoll_command (ctx: Roll_commandContext) { }
 
 	/**
 	 *

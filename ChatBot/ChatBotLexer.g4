@@ -12,5 +12,8 @@ NUMBER : DIGIT+ ;
 
 PING: 'PING' ;
 RANDOM: 'RANDOM' ;
+ROLL: 'ROLL' ;
+
+D: 'd' ;
 
 WS : [ \t\r\n]+ -> skip ;

@@ -1,4 +1,4 @@
-import { FileContext, Ping_commandContext, Random_commandContext, } from "../ChatBot/ts/ChatBotParser";
+import { FileContext, Ping_commandContext, Random_commandContext, Roll_commandContext, } from "../ChatBot/ts/ChatBotParser";
 import ChatBotParserBaseVisitor from "../ChatBot/ts/ChatBotParserBaseVisitor";
 
 function randomIntFromInterval(min: number, max: number) {
@@ -20,6 +20,17 @@ export default class extends ChatBotParserBaseVisitor<string, string> {
 		const to = parseInt(ctx._to.text, 10) || 0;
 
 		return randomIntFromInterval(from, to).toString();
+	};
+
+	override visitRoll_command = (ctx: Roll_commandContext) => {
+		const dieCount = parseInt(ctx._die_count?.text ?? "1", 10);
+		const sides = parseInt(ctx._sides.text, 10);
+
+		const rolledValues = Array(dieCount)
+			.fill(0)
+			.map(() => randomIntFromInterval(1, sides));
+
+		return `${rolledValues.join(" + ")} = ${rolledValues.reduce((acc, val) => acc + val)}`;
 	};
 
 	override defaultResult = () => '';
