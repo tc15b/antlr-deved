@@ -5,6 +5,8 @@ import {ParseTreeListener} from "antlr4";
 
 import { FileContext } from "./ChatBotParser";
 import { CommandContext } from "./ChatBotParser";
+import { Ping_commandContext } from "./ChatBotParser";
+import { Random_commandContext } from "./ChatBotParser";
 
 
 /**
@@ -33,5 +35,27 @@ export default interface ChatBotParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitCommand(ctx: CommandContext): void;
+
+	/**
+	 * Enter a parse tree produced by `ChatBotParser.ping_command`.
+	 * @param ctx the parse tree
+	 */
+	enterPing_command(ctx: Ping_commandContext): void;
+	/**
+	 * Exit a parse tree produced by `ChatBotParser.ping_command`.
+	 * @param ctx the parse tree
+	 */
+	exitPing_command(ctx: Ping_commandContext): void;
+
+	/**
+	 * Enter a parse tree produced by `ChatBotParser.random_command`.
+	 * @param ctx the parse tree
+	 */
+	enterRandom_command(ctx: Random_commandContext): void;
+	/**
+	 * Exit a parse tree produced by `ChatBotParser.random_command`.
+	 * @param ctx the parse tree
+	 */
+	exitRandom_command(ctx: Random_commandContext): void;
 }
 

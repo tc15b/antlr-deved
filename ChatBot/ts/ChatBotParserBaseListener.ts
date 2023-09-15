@@ -4,6 +4,8 @@ import type { ErrorNode, ParserRuleContext, TerminalNode } from "antlr4";
 import type {
 	FileContext,
 	CommandContext,
+	Ping_commandContext,
+	Random_commandContext,
 } from "./ChatBotParser";
 import ChatBotParserListener from "./ChatBotParserListener";
 
@@ -34,6 +36,28 @@ export default class ChatBotParserBaseListener implements ChatBotParserListener 
 		* The default implementation does nothing.
 		*/
 		exitCommand (ctx: CommandContext) { }
+
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		enterPing_command(ctx: Ping_commandContext) { }
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		exitPing_command (ctx: Ping_commandContext) { }
+
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		enterRandom_command(ctx: Random_commandContext) { }
+		/**
+		*
+		* The default implementation does nothing.
+		*/
+		exitRandom_command (ctx: Random_commandContext) { }
 
 	/**
 	 *

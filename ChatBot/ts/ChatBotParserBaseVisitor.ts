@@ -4,6 +4,8 @@ import { AbstractParseTreeVisitor } from "antlr4";
 import type {
 	FileContext,
 	CommandContext,
+	Ping_commandContext,
+	Random_commandContext,
 } from "./ChatBotParser";
 import ChatBotParserVisitor from "./ChatBotParserVisitor";
 
@@ -19,4 +21,16 @@ export default class ChatBotParserBaseVisitor<Result, DefaultType = null> extend
 	 * {@link #visitChildren} on {@code ctx}.
 	 */
 		visitCommand = (ctx: CommandContext) => this.visitChildren(ctx); 
+
+	/**
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+		visitPing_command = (ctx: Ping_commandContext) => this.visitChildren(ctx); 
+
+	/**
+	 * The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.
+	 */
+		visitRandom_command = (ctx: Random_commandContext) => this.visitChildren(ctx); 
 }

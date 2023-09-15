@@ -1,4 +1,4 @@
-import { CommandContext, FileContext, } from "../ChatBot/ts/ChatBotParser";
+import { CommandContext, FileContext, Ping_commandContext, Random_commandContext, } from "../ChatBot/ts/ChatBotParser";
 import ChatBotParserBaseVisitor from "../ChatBot/ts/ChatBotParserBaseVisitor";
 
 export default class extends ChatBotParserBaseVisitor<string, string> {
@@ -9,7 +9,8 @@ export default class extends ChatBotParserBaseVisitor<string, string> {
 			.reduce((acc, val) => acc + "," + val);
 	};
 
-	override visitCommand = (ctx: CommandContext) => 'PONG';
+	override visitPing_command = (ctx: Ping_commandContext) => 'PONG';
+	override visitRandom_command = (ctx: Random_commandContext) => 'RANDOM';
 
 	override defaultResult = () => '';
 }
