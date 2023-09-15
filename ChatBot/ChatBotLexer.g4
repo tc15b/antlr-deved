@@ -4,7 +4,6 @@ options { caseInsensitive = true; }
 
 fragment NL : ('\r'? '\n' | '\r') ;
 fragment EOI : (NL | EOF) ; // End of Input
-fragment WS : (' ' | '\t') ;
 fragment DIGIT : [0-9] ;
 
 NEWLINE : NL+ -> mode(DEFAULT_MODE);
@@ -13,3 +12,5 @@ NUMBER : DIGIT+ ;
 
 PING: 'PING' ;
 RANDOM: 'RANDOM' ;
+
+WS : [ \t\r\n]+ -> skip ;

@@ -24,6 +24,7 @@ export default class ChatBotParser extends Parser {
 	public static readonly NUMBER = 3;
 	public static readonly PING = 4;
 	public static readonly RANDOM = 5;
+	public static readonly WS = 6;
 	public static readonly EOF = Token.EOF;
 	public static readonly RULE_file = 0;
 	public static readonly RULE_command = 1;
@@ -34,7 +35,8 @@ export default class ChatBotParser extends Parser {
                                                             "'PING'", "'RANDOM'" ];
 	public static readonly symbolicNames: (string | null)[] = [ null, "NEWLINE", 
                                                              "DASH", "NUMBER", 
-                                                             "PING", "RANDOM" ];
+                                                             "PING", "RANDOM", 
+                                                             "WS" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"file", "command", "ping_command", "random_command",
@@ -212,7 +214,7 @@ export default class ChatBotParser extends Parser {
 		return localctx;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,5,35,2,0,7,0,2,1,
+	public static readonly _serializedATN: number[] = [4,1,6,35,2,0,7,0,2,1,
 	7,1,2,2,7,2,2,3,7,3,1,0,1,0,5,0,11,8,0,10,0,12,0,14,9,0,4,0,16,8,0,11,0,
 	12,0,17,1,0,1,0,1,1,1,1,3,1,24,8,1,1,2,1,2,1,3,1,3,1,3,3,3,31,8,3,1,3,1,
 	3,1,3,0,0,4,0,2,4,6,0,0,34,0,15,1,0,0,0,2,23,1,0,0,0,4,25,1,0,0,0,6,27,
