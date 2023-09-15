@@ -1,12 +1,12 @@
 import { CharStream, CommonTokenStream, } from 'antlr4';
 import { createServer, } from 'node:http';
 import QS from "node:querystring";
-import SrtListener, { SrtListenResult, } from '../Srt/srt-listener';
-import SrtLexer from '../Srt/ts/SrtLexer';
-import SrtParser, { FileContext, TimestampContext, } from '../Srt/ts/SrtParser';
+import SrtVisitor, { SrtVisitResult, } from '../Srt/srt-visitor';
+import SrtLexer from '../Srt/ts/SrtLexer.js';
+import SrtParser, { FileContext, TimestampContext, } from '../Srt/ts/SrtParser.js';
 import { numberToTimepoint, timepointToNumber, } from './timepoint';
 
-const listener = new SrtListener();
+const visitor = new SrtVisitor();
 
 function parseInput(input: string): FileContext {
 	const chars = new CharStream(input, true);
@@ -21,7 +21,6 @@ function parseInput(input: string): FileContext {
 			errors.push(`line ${line}:${col} ${msg}`);
 		}
 	});
-	(parser as any).addParseListener(listener);
 	parser.buildParseTrees = true;
 	const tree = parser.file();
 
@@ -32,7 +31,7 @@ function parseInput(input: string): FileContext {
 	return tree;
 }
 
-function processLines(lines: SrtListenResult[]) {
+function processLines(lines: SrtVisitResult[]) {
 	return lines.flatMap((line, index) => {
 		return [
 			(index + 1).toString(),
@@ -77,7 +76,7 @@ function buildOutputHtml(input: QS.ParsedUrlQuery): string {
 			return endtime.exception.message;
 		}
 
-		const lines = listener.foundLines;
+		const lines = visitor.visitFile(src) ?? [];
 		if (!lines.length) {
 			return '';
 		}

@@ -1,6 +1,6 @@
 // Generated from Srt.g4 by ANTLR 4.13.0
 
-import { ParseTreeVisitor } from "antlr4";
+import { AbstractParseTreeVisitor } from "antlr4";
 import type {
 	FileContext,
 	StatementContext,
@@ -11,7 +11,7 @@ import type {
 } from "./SrtParser";
 import SrtVisitor from "./SrtVisitor";
 
-export default class SrtBaseVisitor<Result, DefaultType = null> extends ParseTreeVisitor<Result> implements SrtVisitor<Result | DefaultType> {
+export default class SrtBaseVisitor<Result, DefaultType = null> extends AbstractParseTreeVisitor<Result, DefaultType> implements SrtVisitor<Result | DefaultType> {
 	/**
 	 * The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.

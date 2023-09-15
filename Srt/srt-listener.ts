@@ -1,5 +1,5 @@
 import SrtBaseListener from "./ts/SrtBaseListener";
-import { Any_numberContext, FileContext, StatementContext, TimestampContext, } from "./ts/SrtParser";
+import { Any_numberContext, FileContext, StatementContext, TimestampContext, } from "./ts/SrtParser.js";
 import { timepointToNumber, } from "../src/timepoint";
 
 export interface SrtListenResult {
