@@ -1,0 +1,22 @@
+{
+  "name": "antlr-deved",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "clean": "rimraf dist",
+    "prebuild": "yarn clean",
+    "watch": "tsc --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "antlr4": "4.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.3.3",
+    "rimraf": "5.0.1",
+    "typescript": "4.8.3"
+  }
+}
